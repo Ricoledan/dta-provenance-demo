@@ -1,0 +1,105 @@
+site_name: DTA Provenance Standards Demo
+site_description: Production-quality implementations of Data & Trust Alliance provenance standards
+site_author: DTA Provenance Demo Contributors
+site_url: https://ricoledan.github.io/dta-provenance-demo
+
+repo_name: Ricoledan/dta-provenance-demo
+repo_url: https://github.com/Ricoledan/dta-provenance-demo
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search
+  - mermaid2
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:mermaid2.fence_mermaid
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Ricoledan/dta-provenance-demo
+    - icon: fontawesome/solid/globe
+      link: https://www.dtaalliance.org
+  version:
+    provider: mike
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Quick Start: quickstart.md
+    - Installation: installation.md
+    - Nix Setup: nix-setup.md
+    - Docker Setup: docker-setup.md
+  - Documentation:
+    - Architecture: architecture.md
+    - DTA Standards: dta-standards.md
+    - Git vs Blockchain: comparison.md
+    - Case Studies: case-studies.md
+  - Tutorials:
+    - Basic Usage: tutorials/basic-usage.md
+    - Healthcare Example: tutorials/healthcare.md
+    - ML Training Data: tutorials/ml-training.md
+    - API Reference: tutorials/api-reference.md
+  - Examples:
+    - Healthcare Imaging: examples/healthcare.md
+    - ML Training: examples/ml-training.md
+    - IoT Sensors: examples/iot-sensors.md
+    - Financial Data: examples/financial.md
+  - Development:
+    - Contributing: contributing.md
+    - Running Tests: testing.md
+    - Code Coverage: coverage.md
+  - About:
+    - FAQ: faq.md
+    - Credits: credits.md
+    - License: license.md
