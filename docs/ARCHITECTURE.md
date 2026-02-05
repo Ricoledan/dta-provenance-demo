@@ -19,6 +19,7 @@ Technical architecture diagrams for both Git-native and blockchain implementatio
 ### System Overview
 
 ```mermaid
+%%{init: {"theme":"dark","themeVariables":{"darkMode":true,"background":"#0d1117","primaryColor":"#2d333b","primaryTextColor":"#e6edf3","primaryBorderColor":"#444c56","lineColor":"#768390","secondaryColor":"#1c2128","tertiaryColor":"#22272e","clusterBkg":"#2d333b","clusterBorder":"#444c56","nodeTextColor":"#e6edf3","mainBkg":"#2d333b","secondBkg":"#22272e","edgeLabelBackground":"#2d333b","nodeBorder":"#444c56"}}}%%
 graph TB
     subgraph User["User Interface"]
         CLI["CLI Tool<br/>(dta-provenance)"]
@@ -39,21 +40,12 @@ graph TB
     User --> Core
     Core --> Git
 
-    style User fill:#fff,stroke:#333,stroke-width:2px
-    style Core fill:#fff,stroke:#333,stroke-width:2px
-    style Git fill:#fff,stroke:#333,stroke-width:2px
-    style CLI fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Code fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Tracker fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Verifier fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Meta fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Commits fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style History fill:#f9f9f9,stroke:#333,stroke-width:1px
 ```
 
 ### Commit Structure
 
 ```mermaid
+%%{init: {"theme":"dark","themeVariables":{"darkMode":true,"background":"#0d1117","primaryColor":"#2d333b","primaryTextColor":"#e6edf3","primaryBorderColor":"#444c56","lineColor":"#768390","secondaryColor":"#1c2128","tertiaryColor":"#22272e","clusterBkg":"#2d333b","clusterBorder":"#444c56","nodeTextColor":"#e6edf3","mainBkg":"#2d333b","secondBkg":"#22272e","edgeLabelBackground":"#2d333b","nodeBorder":"#444c56"}}}%%
 graph LR
     subgraph Commit["Git Commit"]
         Message["Commit Message"]
@@ -73,15 +65,6 @@ graph LR
     Commit --> Tree
     Commit --> Parent
 
-    style Commit fill:#fff,stroke:#333,stroke-width:2px
-    style Trailers fill:#fff,stroke:#333,stroke-width:2px
-    style Message fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Tree fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Parent fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Version fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Hash fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Name fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style JSON fill:#f9f9f9,stroke:#333,stroke-width:1px
 ```
 
 ---
@@ -91,6 +74,7 @@ graph LR
 ### System Overview
 
 ```mermaid
+%%{init: {"theme":"dark","themeVariables":{"darkMode":true,"background":"#0d1117","primaryColor":"#2d333b","primaryTextColor":"#e6edf3","primaryBorderColor":"#444c56","lineColor":"#768390","secondaryColor":"#1c2128","tertiaryColor":"#22272e","clusterBkg":"#2d333b","clusterBorder":"#444c56","nodeTextColor":"#e6edf3","mainBkg":"#2d333b","secondBkg":"#22272e","edgeLabelBackground":"#2d333b","nodeBorder":"#444c56"}}}%%
 graph TB
     subgraph User["User Interface"]
         Web3["Web3 DApp"]
@@ -119,23 +103,12 @@ graph TB
     User -.-> IPFS
     Contract -.-> IPFS
 
-    style User fill:#fff,stroke:#333,stroke-width:2px
-    style Contract fill:#fff,stroke:#333,stroke-width:2px
-    style Blockchain fill:#fff,stroke:#333,stroke-width:2px
-    style Storage fill:#fff,stroke:#333,stroke-width:2px
-    style Web3 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Script fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Registry fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Events fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style ETH fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style L2 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style IPFS fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Indexer fill:#f9f9f9,stroke:#333,stroke-width:1px
 ```
 
 ### Smart Contract Data Structure
 
 ```mermaid
+%%{init: {"theme":"dark","themeVariables":{"darkMode":true,"background":"#0d1117","primaryColor":"#2d333b","primaryTextColor":"#e6edf3","primaryBorderColor":"#444c56","lineColor":"#768390","secondaryColor":"#1c2128","tertiaryColor":"#22272e","clusterBkg":"#2d333b","clusterBorder":"#444c56","nodeTextColor":"#e6edf3","mainBkg":"#2d333b","secondBkg":"#22272e","edgeLabelBackground":"#2d333b","nodeBorder":"#444c56"}}}%%
 graph TB
     subgraph Contract["ProvenanceRegistry Contract"]
         Mapping["records mapping<br/>(bytes32 => ProvenanceRecord)"]
@@ -154,17 +127,6 @@ graph TB
 
     Contract --> Record
 
-    style Contract fill:#fff,stroke:#333,stroke-width:2px
-    style Record fill:#fff,stroke:#333,stroke-width:2px
-    style Mapping fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Provider fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Counter fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Name fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style URI fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Hash fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Addr fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Time fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Verified fill:#f9f9f9,stroke:#333,stroke-width:1px
 ```
 
 ---
@@ -174,6 +136,7 @@ graph TB
 ### Git-Native: Commit with Provenance
 
 ```mermaid
+%%{init: {"theme":"dark","themeVariables":{"darkMode":true,"background":"#0d1117","primaryColor":"#2d333b","primaryTextColor":"#e6edf3","primaryBorderColor":"#444c56","lineColor":"#768390","secondaryColor":"#1c2128","tertiaryColor":"#22272e","clusterBkg":"#2d333b","clusterBorder":"#444c56","nodeTextColor":"#e6edf3","mainBkg":"#2d333b","secondBkg":"#22272e","edgeLabelBackground":"#2d333b","nodeBorder":"#444c56"}}}%%
 sequenceDiagram
     participant User
     participant CLI
@@ -198,6 +161,7 @@ sequenceDiagram
 ### Git-Native: Verify Integrity
 
 ```mermaid
+%%{init: {"theme":"dark","themeVariables":{"darkMode":true,"background":"#0d1117","primaryColor":"#2d333b","primaryTextColor":"#e6edf3","primaryBorderColor":"#444c56","lineColor":"#768390","secondaryColor":"#1c2128","tertiaryColor":"#22272e","clusterBkg":"#2d333b","clusterBorder":"#444c56","nodeTextColor":"#e6edf3","mainBkg":"#2d333b","secondBkg":"#22272e","edgeLabelBackground":"#2d333b","nodeBorder":"#444c56"}}}%%
 sequenceDiagram
     participant User
     participant CLI
@@ -223,6 +187,7 @@ sequenceDiagram
 ### Blockchain: Register Provenance
 
 ```mermaid
+%%{init: {"theme":"dark","themeVariables":{"darkMode":true,"background":"#0d1117","primaryColor":"#2d333b","primaryTextColor":"#e6edf3","primaryBorderColor":"#444c56","lineColor":"#768390","secondaryColor":"#1c2128","tertiaryColor":"#22272e","clusterBkg":"#2d333b","clusterBorder":"#444c56","nodeTextColor":"#e6edf3","mainBkg":"#2d333b","secondBkg":"#22272e","edgeLabelBackground":"#2d333b","nodeBorder":"#444c56"}}}%%
 sequenceDiagram
     participant User
     participant Script
@@ -254,6 +219,7 @@ sequenceDiagram
 ### Data Lineage DAG (Directed Acyclic Graph)
 
 ```mermaid
+%%{init: {"theme":"dark","themeVariables":{"darkMode":true,"background":"#0d1117","primaryColor":"#2d333b","primaryTextColor":"#e6edf3","primaryBorderColor":"#444c56","lineColor":"#768390","secondaryColor":"#1c2128","tertiaryColor":"#22272e","clusterBkg":"#2d333b","clusterBorder":"#444c56","nodeTextColor":"#e6edf3","mainBkg":"#2d333b","secondBkg":"#22272e","edgeLabelBackground":"#2d333b","nodeBorder":"#444c56"}}}%%
 graph LR
     A["Raw Data<br/>v1.0"]
     B["Cleaned Data<br/>v1.1"]
@@ -272,18 +238,12 @@ graph LR
     E --> F
     E --> G
 
-    style A fill:#f9f9f9,stroke:#333,stroke-width:2px
-    style B fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style C fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style D fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style E fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style F fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style G fill:#f9f9f9,stroke:#333,stroke-width:1px
 ```
 
 ### Provenance Chain (Git Commits)
 
 ```mermaid
+%%{init: {"theme":"dark","themeVariables":{"darkMode":true,"background":"#0d1117","primaryColor":"#2d333b","primaryTextColor":"#e6edf3","primaryBorderColor":"#444c56","lineColor":"#768390","secondaryColor":"#1c2128","tertiaryColor":"#22272e","clusterBkg":"#2d333b","clusterBorder":"#444c56","nodeTextColor":"#e6edf3","mainBkg":"#2d333b","secondBkg":"#22272e","edgeLabelBackground":"#2d333b","nodeBorder":"#444c56"}}}%%
 graph LR
     subgraph History["Git History (Newest to Oldest)"]
         C3["Commit 3<br/>Update dataset<br/>DTA metadata"]
@@ -296,11 +256,6 @@ graph LR
     C2 --> C1
     C1 --> C0
 
-    style History fill:#fff,stroke:#333,stroke-width:2px
-    style C3 fill:#f9f9f9,stroke:#333,stroke-width:2px
-    style C2 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style C1 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style C0 fill:#f9f9f9,stroke:#333,stroke-width:1px
 ```
 
 ---
@@ -310,6 +265,7 @@ graph LR
 ### MLflow Integration
 
 ```mermaid
+%%{init: {"theme":"dark","themeVariables":{"darkMode":true,"background":"#0d1117","primaryColor":"#2d333b","primaryTextColor":"#e6edf3","primaryBorderColor":"#444c56","lineColor":"#768390","secondaryColor":"#1c2128","tertiaryColor":"#22272e","clusterBkg":"#2d333b","clusterBorder":"#444c56","nodeTextColor":"#e6edf3","mainBkg":"#2d333b","secondBkg":"#22272e","edgeLabelBackground":"#2d333b","nodeBorder":"#444c56"}}}%%
 graph TB
     subgraph ML["ML Training Pipeline"]
         Data["Training Data"]
@@ -341,22 +297,12 @@ graph TB
     Commit -.-> Note
     Note -.-> Run
 
-    style ML fill:#fff,stroke:#333,stroke-width:2px
-    style Prov fill:#fff,stroke:#333,stroke-width:2px
-    style MLflow fill:#fff,stroke:#333,stroke-width:2px
-    style Data fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Train fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Log fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Tracker fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Commit fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Experiment fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Run fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Artifacts fill:#f9f9f9,stroke:#333,stroke-width:1px
 ```
 
 ### DVC Integration
 
 ```mermaid
+%%{init: {"theme":"dark","themeVariables":{"darkMode":true,"background":"#0d1117","primaryColor":"#2d333b","primaryTextColor":"#e6edf3","primaryBorderColor":"#444c56","lineColor":"#768390","secondaryColor":"#1c2128","tertiaryColor":"#22272e","clusterBkg":"#2d333b","clusterBorder":"#444c56","nodeTextColor":"#e6edf3","mainBkg":"#2d333b","secondBkg":"#22272e","edgeLabelBackground":"#2d333b","nodeBorder":"#444c56"}}}%%
 graph TB
     subgraph Files["Data Files"]
         Large["large_dataset.parquet<br/>(10 GB)"]
@@ -380,19 +326,12 @@ graph TB
     Note["DVC handles large files<br/>Git tracks provenance"]
     DVC -.-> Note
 
-    style Files fill:#fff,stroke:#333,stroke-width:2px
-    style Storage fill:#fff,stroke:#333,stroke-width:2px
-    style Prov fill:#fff,stroke:#333,stroke-width:2px
-    style Large fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style DVC fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style S3 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Git fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Meta fill:#f9f9f9,stroke:#333,stroke-width:1px
 ```
 
 ### CI/CD Pipeline Integration
 
 ```mermaid
+%%{init: {"theme":"dark","themeVariables":{"darkMode":true,"background":"#0d1117","primaryColor":"#2d333b","primaryTextColor":"#e6edf3","primaryBorderColor":"#444c56","lineColor":"#768390","secondaryColor":"#1c2128","tertiaryColor":"#22272e","clusterBkg":"#2d333b","clusterBorder":"#444c56","nodeTextColor":"#e6edf3","mainBkg":"#2d333b","secondBkg":"#22272e","edgeLabelBackground":"#2d333b","nodeBorder":"#444c56"}}}%%
 graph LR
     subgraph Pipeline["CI/CD Pipeline"]
         Push["Git Push"]
@@ -415,16 +354,6 @@ graph LR
     Verify --> Test
     Test --> Deploy
 
-    style Pipeline fill:#fff,stroke:#333,stroke-width:2px
-    style Actions fill:#fff,stroke:#333,stroke-width:2px
-    style Push fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Validate fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Test fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Deploy fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Checkout fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Install fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Check fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Verify fill:#f9f9f9,stroke:#333,stroke-width:1px
 ```
 
 ---
@@ -434,6 +363,7 @@ graph LR
 ### Complete Field Hierarchy
 
 ```mermaid
+%%{init: {"theme":"dark","themeVariables":{"darkMode":true,"background":"#0d1117","primaryColor":"#2d333b","primaryTextColor":"#e6edf3","primaryBorderColor":"#444c56","lineColor":"#768390","secondaryColor":"#1c2128","tertiaryColor":"#22272e","clusterBkg":"#2d333b","clusterBorder":"#444c56","nodeTextColor":"#e6edf3","mainBkg":"#2d333b","secondBkg":"#22272e","edgeLabelBackground":"#2d333b","nodeBorder":"#444c56"}}}%%
 graph TB
     Root["DTA Provenance<br/>Metadata v1.0.0"]
 
@@ -471,31 +401,6 @@ graph TB
     Root --> Provenance
     Root --> Use
 
-    style Root fill:#fff,stroke:#333,stroke-width:2px
-    style Source fill:#fff,stroke:#333,stroke-width:2px
-    style Provenance fill:#fff,stroke:#333,stroke-width:2px
-    style Use fill:#fff,stroke:#333,stroke-width:2px
-    style S1 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style S2 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style S3 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style S4 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style S5 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style S6 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style S7 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style S8 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style P1 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style P2 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style P3 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style P4 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style P5 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style P6 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style U1 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style U2 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style U3 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style U4 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style U5 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style U6 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style U7 fill:#f9f9f9,stroke:#333,stroke-width:1px
 ```
 
 ---
@@ -505,6 +410,7 @@ graph TB
 ### Git-Native Security Layers
 
 ```mermaid
+%%{init: {"theme":"dark","themeVariables":{"darkMode":true,"background":"#0d1117","primaryColor":"#2d333b","primaryTextColor":"#e6edf3","primaryBorderColor":"#444c56","lineColor":"#768390","secondaryColor":"#1c2128","tertiaryColor":"#22272e","clusterBkg":"#2d333b","clusterBorder":"#444c56","nodeTextColor":"#e6edf3","mainBkg":"#2d333b","secondBkg":"#22272e","edgeLabelBackground":"#2d333b","nodeBorder":"#444c56"}}}%%
 graph TB
     subgraph Security["Security Layers"]
         L1["Layer 1: Git SHA-1 Hashing<br/>Every commit cryptographically hashed"]
@@ -520,17 +426,12 @@ graph TB
     Trust["Trust Model:<br/>Federated (Git host)"]
     L4 --> Trust
 
-    style Security fill:#fff,stroke:#333,stroke-width:2px
-    style L1 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style L2 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style L3 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style L4 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Trust fill:#f9f9f9,stroke:#333,stroke-width:2px
 ```
 
 ### Blockchain Security Layers
 
 ```mermaid
+%%{init: {"theme":"dark","themeVariables":{"darkMode":true,"background":"#0d1117","primaryColor":"#2d333b","primaryTextColor":"#e6edf3","primaryBorderColor":"#444c56","lineColor":"#768390","secondaryColor":"#1c2128","tertiaryColor":"#22272e","clusterBkg":"#2d333b","clusterBorder":"#444c56","nodeTextColor":"#e6edf3","mainBkg":"#2d333b","secondBkg":"#22272e","edgeLabelBackground":"#2d333b","nodeBorder":"#444c56"}}}%%
 graph TB
     subgraph Security["Security Layers"]
         L1["Layer 1: Blockchain Consensus<br/>Network-wide agreement"]
@@ -546,12 +447,6 @@ graph TB
     Trust["Trust Model:<br/>Trustless (no central authority)"]
     L4 --> Trust
 
-    style Security fill:#fff,stroke:#333,stroke-width:2px
-    style L1 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style L2 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style L3 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style L4 fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Trust fill:#f9f9f9,stroke:#333,stroke-width:2px
 ```
 
 ---
@@ -561,6 +456,7 @@ graph TB
 ### Git-Native Performance Profile
 
 ```mermaid
+%%{init: {"theme":"dark","themeVariables":{"darkMode":true,"background":"#0d1117","primaryColor":"#2d333b","primaryTextColor":"#e6edf3","primaryBorderColor":"#444c56","lineColor":"#768390","secondaryColor":"#1c2128","tertiaryColor":"#22272e","clusterBkg":"#2d333b","clusterBorder":"#444c56","nodeTextColor":"#e6edf3","mainBkg":"#2d333b","secondBkg":"#22272e","edgeLabelBackground":"#2d333b","nodeBorder":"#444c56"}}}%%
 graph LR
     Operation["Operation Type"]
 
@@ -577,16 +473,12 @@ graph LR
     Note["All operations<br/>complete instantly"]
     Trace -.-> Note
 
-    style Operation fill:#fff,stroke:#333,stroke-width:2px
-    style Write fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Read fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Verify fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Trace fill:#f9f9f9,stroke:#333,stroke-width:1px
 ```
 
 ### Blockchain Performance Profile
 
 ```mermaid
+%%{init: {"theme":"dark","themeVariables":{"darkMode":true,"background":"#0d1117","primaryColor":"#2d333b","primaryTextColor":"#e6edf3","primaryBorderColor":"#444c56","lineColor":"#768390","secondaryColor":"#1c2128","tertiaryColor":"#22272e","clusterBkg":"#2d333b","clusterBorder":"#444c56","nodeTextColor":"#e6edf3","mainBkg":"#2d333b","secondBkg":"#22272e","edgeLabelBackground":"#2d333b","nodeBorder":"#444c56"}}}%%
 graph LR
     Operation["Operation Type"]
 
@@ -603,11 +495,6 @@ graph LR
     Note["Block confirmation<br/>adds latency"]
     Write -.-> Note
 
-    style Operation fill:#fff,stroke:#333,stroke-width:2px
-    style Write fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Read fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Verify fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Query fill:#f9f9f9,stroke:#333,stroke-width:1px
 ```
 
 ---

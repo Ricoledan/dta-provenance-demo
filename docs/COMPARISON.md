@@ -43,6 +43,7 @@ A comprehensive technical comparison of two approaches to implementing DTA Data 
 ### Git-Native Architecture
 
 ```mermaid
+%%{init: {"theme":"dark","themeVariables":{"darkMode":true,"background":"#0d1117","primaryColor":"#2d333b","primaryTextColor":"#e6edf3","primaryBorderColor":"#444c56","lineColor":"#768390","secondaryColor":"#1c2128","tertiaryColor":"#22272e","clusterBkg":"#2d333b","clusterBorder":"#444c56","nodeTextColor":"#e6edf3","mainBkg":"#2d333b","secondBkg":"#22272e","edgeLabelBackground":"#2d333b","nodeBorder":"#444c56"}}}%%
 graph TB
     subgraph AppLayer["Application Layer"]
         CLI["Python CLI"]
@@ -61,14 +62,6 @@ graph TB
     AppLayer --> ProvLayer
     ProvLayer --> StorageLayer
 
-    style AppLayer fill:#fff,stroke:#333,stroke-width:2px
-    style ProvLayer fill:#fff,stroke:#333,stroke-width:2px
-    style StorageLayer fill:#fff,stroke:#333,stroke-width:2px
-    style CLI fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Lib fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style API fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style GitCommit fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style GitRepo fill:#f9f9f9,stroke:#333,stroke-width:1px
 ```
 
 **Key Properties:**
@@ -83,6 +76,7 @@ graph TB
 ### Blockchain Architecture
 
 ```mermaid
+%%{init: {"theme":"dark","themeVariables":{"darkMode":true,"background":"#0d1117","primaryColor":"#2d333b","primaryTextColor":"#e6edf3","primaryBorderColor":"#444c56","lineColor":"#768390","secondaryColor":"#1c2128","tertiaryColor":"#22272e","clusterBkg":"#2d333b","clusterBorder":"#444c56","nodeTextColor":"#e6edf3","mainBkg":"#2d333b","secondBkg":"#22272e","edgeLabelBackground":"#2d333b","nodeBorder":"#444c56"}}}%%
 graph TB
     subgraph AppLayer["Application Layer"]
         DApp["Web3 DApp"]
@@ -110,20 +104,6 @@ graph TB
     ContractLayer --> BlockchainLayer
     BlockchainLayer --> OffChain
 
-    style AppLayer fill:#fff,stroke:#333,stroke-width:2px
-    style ContractLayer fill:#fff,stroke:#333,stroke-width:2px
-    style BlockchainLayer fill:#fff,stroke:#333,stroke-width:2px
-    style OffChain fill:#fff,stroke:#333,stroke-width:2px
-    style DApp fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style SDK fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Interact fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Registry fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Ethereum fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Polygon fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Arbitrum fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style IPFS fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Arweave fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Filecoin fill:#f9f9f9,stroke:#333,stroke-width:1px
 ```
 
 **Key Properties:**
