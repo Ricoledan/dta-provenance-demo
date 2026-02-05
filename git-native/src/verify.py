@@ -5,7 +5,7 @@ Provides cryptographic verification of Git-based provenance records
 and DTA standards compliance validation.
 """
 
-from typing import Dict, List, Tuple
+from typing import Dict, List, Optional, Tuple
 from pathlib import Path
 from dataclasses import dataclass
 import json
