@@ -45,8 +45,8 @@
             nodejs_20
             nodePackages.npm
 
-            # Blockchain tools
-            nodePackages.hardhat
+# Blockchain tools
+             # Hardhat will be installed via npm in the blockchain directory
 
             # Optional: for graph visualization
             graphviz
