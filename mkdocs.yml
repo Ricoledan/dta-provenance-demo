@@ -81,14 +81,11 @@ nav:
     - Nix Setup: nix-setup.md
     - Docker Setup: docker-setup.md
   - Documentation:
-    - Architecture: architecture.md
-    - DTA Standards: dta-standards.md
-    - Git vs Blockchain: comparison.md
-    - Case Studies: case-studies.md
+    - Architecture: ARCHITECTURE.md
+    - DTA Standards: DTA_STANDARDS.md
+    - Git vs Blockchain: COMPARISON.md
   - Tutorials:
     - Basic Usage: tutorials/basic-usage.md
-    - Healthcare Example: tutorials/healthcare.md
-    - ML Training Data: tutorials/ml-training.md
     - API Reference: tutorials/api-reference.md
   - Examples:
     - Healthcare Imaging: examples/healthcare.md
@@ -96,10 +93,9 @@ nav:
     - IoT Sensors: examples/iot-sensors.md
     - Financial Data: examples/financial.md
   - Development:
-    - Contributing: contributing.md
+    - Contributing: CONTRIBUTING.md
     - Running Tests: testing.md
     - Code Coverage: coverage.md
   - About:
     - FAQ: faq.md
     - Credits: credits.md
-    - License: license.md
