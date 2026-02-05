@@ -79,7 +79,7 @@ jobs:
     - name: Install dependencies
       run: |
         cd blockchain
-        npm ci
+        npm install
 
     - name: Run Hardhat tests
       run: |
@@ -119,7 +119,7 @@ jobs:
     - name: Install Blockchain dependencies
       run: |
         cd blockchain
-        npm ci
+        npm install
 
     - name: Validate DTA standards examples
       run: |
@@ -176,7 +176,7 @@ jobs:
     - name: Install Solidity linting tools
       run: |
         cd blockchain
-        npm ci
+        npm install
 
     - name: Lint Solidity contracts
       run: |
