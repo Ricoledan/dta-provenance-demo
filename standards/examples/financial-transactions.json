@@ -1,0 +1,56 @@
+{
+  "source": {
+    "datasetName": "Credit Card Fraud Detection Training Dataset",
+    "datasetVersion": "1.5.2",
+    "datasetURI": "s3://fintech-ml-datasets/fraud-detection-v1.5",
+    "providerName": "Global Payments Network Analytics",
+    "providerWebsite": "https://example-payments.com/fraud-detection",
+    "geographicSourceOfData": "European Union member states",
+    "dataOriginCountry": "Multiple EU countries (anonymized)",
+    "locationDataGenerated": "Transaction processing centers across EU"
+  },
+  "provenance": {
+    "dataGenerationMethod": "Real credit card transactions from payment processing network during September 2023. Transactions collected from point-of-sale terminals, online merchants, and ATM networks. Anonymized using k-anonymity (k=10) and differential privacy (ε=2.0).",
+    "dateDataGenerated": "2023-09-01T00:00:00Z",
+    "dataType": "Tabular",
+    "dataFormat": "CSV with 31 columns: Time (seconds from first transaction), V1-V28 (PCA-transformed features from original transaction data), Amount (transaction value in EUR), Class (0=legitimate, 1=fraud)",
+    "dataSubjectivity": "Mixed - transaction amounts and timestamps are objective, but fraud labels represent expert analyst decisions (may include false positives/negatives). Fraud labeling accuracy estimated at 98.5% based on chargeback confirmations.",
+    "qualityIndicators": {
+      "recordCount": "284,807 transactions",
+      "fraudRate": "0.172% (492 fraudulent transactions)",
+      "classImbalance": "Highly imbalanced - 99.828% legitimate vs 0.172% fraud",
+      "missingValues": "0% - all records complete",
+      "timeSpan": "2 days of transactions",
+      "geographicCoverage": "15 EU countries (specific countries anonymized)"
+    },
+    "dataProcessingSteps": [
+      "Raw transaction extraction from payment processing databases",
+      "PII removal: cardholder names, card numbers, merchant identifiers",
+      "PCA transformation: 28 principal components derived from original ~60 transaction features (merchant category, location, device fingerprint, etc.)",
+      "Differential privacy noise injection: Laplace noise (ε=2.0) added to transaction amounts",
+      "Timestamp anonymization: converted to seconds from arbitrary reference point",
+      "Geographic generalization: country-level only, no city or merchant location data",
+      "k-anonymity enforcement: removed transactions that could uniquely identify patterns (k=10 threshold)",
+      "Fraud label verification: cross-referenced with chargeback data and manual analyst reviews"
+    ]
+  },
+  "use": {
+    "intendedUse": "Training and evaluation of machine learning models for real-time fraud detection in payment systems. Suitable for research on imbalanced classification, anomaly detection, and cost-sensitive learning. Educational use in financial ML courses.",
+    "restrictions": "Non-commercial research and educational use only. Cannot be used for actual production fraud detection without separate licensing and regulatory approval. Cannot attempt to reverse PCA transformation or re-identify cardholders. Not approved for use outside EU due to GDPR transfer restrictions.",
+    "legalRightsToUse": "Data processing authorized under GDPR Article 6(1)(f) - legitimate interest for fraud prevention. Data Protection Impact Assessment (DPIA) completed. Approved by EU Data Protection Authority. Pseudonymization techniques meet GDPR Article 32 security requirements.",
+    "privacyMeasures": "Multi-layer anonymization: (1) PII removal, (2) PCA transformation prevents feature reversal, (3) k-anonymity (k=10) prevents unique pattern identification, (4) differential privacy (ε=2.0) protects transaction amounts, (5) geographic generalization to country level, (6) temporal anonymization. Re-identification risk assessed at < 0.001% by independent privacy expert.",
+    "sensitiveData": true,
+    "sensitiveDataCategories": [
+      "Financial transaction data",
+      "Payment card data (anonymized)",
+      "Consumer spending patterns (anonymized)"
+    ],
+    "dataProcessingLocation": "EU data centers only (Frankfurt, Amsterdam). No cross-border transfers outside EU. Processing infrastructure certified under ISO 27001, PCI-DSS Level 1, and SOC 2 Type II."
+  },
+  "_comments": {
+    "why_this_matters": "Financial data is among the most regulated globally (GDPR, PCI-DSS, PSD2, etc.). Comprehensive anonymization documentation is required to demonstrate compliance and enable data sharing for fraud research.",
+    "key_challenges": "Balancing data utility with privacy protection - aggressive anonymization reduces model performance. Class imbalance (0.172% fraud) makes this a challenging ML problem. Cannot share raw features due to risk of merchant identification.",
+    "regulatory_context": "GDPR requires explicit documentation of anonymization techniques, legal basis, and re-identification risk assessment. PCI-DSS prohibits storage of full card numbers. PSD2 requires strong customer authentication data, which has been removed from this dataset.",
+    "real_world_context": "Similar to Kaggle's Credit Card Fraud Detection dataset (from Worldline and ULB). Used by hundreds of researchers but requires careful documentation to demonstrate it's truly anonymized under GDPR."
+  }
+}

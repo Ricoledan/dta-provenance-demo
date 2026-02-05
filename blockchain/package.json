@@ -1,0 +1,33 @@
+{
+  "name": "dta-provenance-blockchain",
+  "version": "1.0.0",
+  "description": "Blockchain implementation of DTA provenance standards using Solidity",
+  "main": "index.js",
+  "scripts": {
+    "test": "hardhat test",
+    "test:gas": "REPORT_GAS=true hardhat test",
+    "deploy:local": "hardhat run scripts/deploy.js --network localhost",
+    "node": "hardhat node",
+    "compile": "hardhat compile",
+    "clean": "hardhat clean"
+  },
+  "keywords": [
+    "provenance",
+    "blockchain",
+    "ethereum",
+    "solidity",
+    "dta",
+    "smart-contracts"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "hardhat": "^2.19.0",
+    "hardhat-gas-reporter": "^1.0.9"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.0",
+    "ethers": "^6.9.0"
+  }
+}

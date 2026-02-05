@@ -1,0 +1,50 @@
+{
+  "source": {
+    "datasetName": "Chest X-Ray Pneumonia Detection Dataset",
+    "datasetVersion": "2.1.0",
+    "datasetURI": "s3://hospital-ml-datasets/chest-xray-v2",
+    "providerName": "General Hospital ML Research Division",
+    "providerWebsite": "https://example-hospital.edu/ml-research",
+    "geographicSourceOfData": "United States, Massachusetts",
+    "dataOriginCountry": "US",
+    "locationDataGenerated": "Massachusetts General Hospital, Boston, MA"
+  },
+  "provenance": {
+    "dataGenerationMethod": "DICOM medical imaging from diagnostic radiology department. Images captured using Siemens SOMATOM Definition AS+ CT scanner and GE Revolution EVO CT system. Standardized acquisition protocols following ACR guidelines.",
+    "dateDataGenerated": "2023-01-15T00:00:00Z",
+    "dataType": "Image",
+    "dataFormat": "DICOM (original), PNG (processed for ML, 512x512 pixels, 8-bit grayscale)",
+    "dataSubjectivity": "Subjective - radiologist diagnoses and annotations represent expert clinical interpretation, validated by consensus of 3 board-certified radiologists with 10+ years experience",
+    "qualityIndicators": {
+      "resolution": "512x512 pixels, 8-bit grayscale",
+      "labelingAccuracy": "Inter-rater agreement κ=0.89 (strong agreement)",
+      "completeness": "100% of images have diagnostic labels",
+      "consistency": "Standardized ACR acquisition protocols",
+      "missingData": "0.3% of cases excluded due to motion artifacts"
+    },
+    "dataProcessingSteps": [
+      "DICOM to PNG conversion with normalization",
+      "Image resizing to 512x512 pixels",
+      "Histogram equalization for contrast enhancement",
+      "De-identification: removal of all PHI metadata from DICOM headers",
+      "Quality control: automated detection and exclusion of motion artifacts"
+    ]
+  },
+  "use": {
+    "intendedUse": "Training and validation of machine learning models for automated pneumonia detection in chest X-rays. Intended for research and educational purposes to advance medical AI diagnostics.",
+    "restrictions": "Research and educational use only. Not approved for clinical deployment without additional validation and FDA clearance. Commercial use requires separate licensing agreement with General Hospital.",
+    "legalRightsToUse": "Institutional Review Board (IRB) approved under protocol #2022-ML-001. Patient consent obtained for research use of de-identified medical data. HIPAA compliant under Safe Harbor de-identification method.",
+    "privacyMeasures": "Full de-identification per HIPAA Safe Harbor: all 18 identifiers removed including patient names, dates (converted to year only), geographic identifiers, device IDs, and biometric identifiers. Expert determination confirmed re-identification risk < 0.01%.",
+    "sensitiveData": true,
+    "sensitiveDataCategories": [
+      "Protected Health Information (PHI)",
+      "Medical diagnostic data"
+    ],
+    "dataProcessingLocation": "US-based secure compute environment (AWS us-east-1), HIPAA-compliant infrastructure, encrypted at rest (AES-256) and in transit (TLS 1.3)"
+  },
+  "_comments": {
+    "why_this_matters": "Medical imaging requires strict privacy compliance (HIPAA), clear documentation of data quality for FDA approval pathways, and transparent provenance for clinical validation studies.",
+    "key_challenges": "Balancing data utility with privacy protection, maintaining image quality during processing, ensuring representative geographic and demographic distribution",
+    "regulatory_context": "FDA guidance on AI/ML-based medical devices requires comprehensive data provenance documentation for premarket submissions"
+  }
+}

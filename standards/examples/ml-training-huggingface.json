@@ -1,0 +1,48 @@
+{
+  "source": {
+    "datasetName": "CodeParrot Clean",
+    "datasetVersion": "1.0.0",
+    "datasetURI": "https://huggingface.co/datasets/codeparrot/codeparrot-clean",
+    "providerName": "HuggingFace",
+    "providerWebsite": "https://huggingface.co",
+    "geographicSourceOfData": "Global (GitHub public repositories)",
+    "dataOriginCountry": "Multiple (global open-source projects)",
+    "locationDataGenerated": "GitHub.com (worldwide distributed version control system)"
+  },
+  "provenance": {
+    "dataGenerationMethod": "Scraped from public GitHub repositories using GitHub API. Filtered for Python code files with permissive licenses (MIT, Apache 2.0, BSD). Deduplicated using MinHash LSH with Jaccard similarity threshold of 0.85.",
+    "dateDataGenerated": "2021-09-01T00:00:00Z",
+    "dataType": "Text",
+    "dataFormat": "JSON Lines (.jsonl), each record contains: code snippet (string), repository name, file path, license type, star count, last commit date",
+    "dataSubjectivity": "Objective - source code is deterministic. However, code quality and style vary based on author preferences and project conventions",
+    "qualityIndicators": {
+      "totalSize": "50GB compressed, 200GB uncompressed",
+      "recordCount": "3.2 million code files",
+      "deduplicationRate": "35% removed as near-duplicates",
+      "licenseCompliance": "100% permissive licenses verified",
+      "languageDistribution": "Python 3.x: 95%, Python 2.x: 5%"
+    },
+    "dataProcessingSteps": [
+      "GitHub API scraping of public repositories",
+      "License detection and filtering (only MIT, Apache 2.0, BSD)",
+      "MinHash LSH deduplication (Jaccard similarity > 0.85)",
+      "Syntax validation (Python ast.parse)",
+      "PII detection and filtering (email addresses, API keys)",
+      "Repository metadata extraction (stars, forks, last activity)"
+    ]
+  },
+  "use": {
+    "intendedUse": "Training large language models for code generation and completion. Suitable for pre-training, fine-tuning, and evaluation of Python code models. Educational use for studying code patterns and software engineering practices.",
+    "restrictions": "Subject to original open-source licenses (MIT, Apache 2.0, BSD). Attribution required for derived models. Not suitable for training models that will generate closed-source commercial code without proper license compliance review.",
+    "legalRightsToUse": "Collected from public repositories with permissive licenses. Complies with GitHub Terms of Service for API usage. Fair use doctrine applies for ML training purposes under current US copyright law interpretations.",
+    "privacyMeasures": "Automated PII detection removed: email addresses (99.2% recall), API keys and tokens (100% recall using regex patterns), SSH keys, AWS credentials, database connection strings. Manual review of flagged files.",
+    "sensitiveData": false,
+    "sensitiveDataCategories": [],
+    "dataProcessingLocation": "AWS us-west-2 (data collection and processing), HuggingFace Hub CDN (distribution)"
+  },
+  "_comments": {
+    "why_this_matters": "Code datasets raise unique IP concerns - must document license compliance for legal use in AI training. Recent litigation (GitHub Copilot lawsuits) makes provenance documentation critical.",
+    "key_challenges": "License compliance verification at scale, PII detection in code comments, deduplication without losing important variations, handling code from deprecated Python versions",
+    "ai_act_relevance": "EU AI Act requires training data documentation for high-risk AI systems. Code generation models may fall under general-purpose AI regulations requiring transparency about training data sources."
+  }
+}

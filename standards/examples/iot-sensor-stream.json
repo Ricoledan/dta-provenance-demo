@@ -1,0 +1,50 @@
+{
+  "source": {
+    "datasetName": "Urban Air Quality Monitoring Network",
+    "datasetVersion": "3.2.1",
+    "datasetURI": "mqtt://sensors.cityairquality.io/streams/2024",
+    "providerName": "Smart City Environmental Initiative",
+    "providerWebsite": "https://smartcity.example.gov/air-quality",
+    "geographicSourceOfData": "San Francisco Bay Area, California, USA",
+    "dataOriginCountry": "US",
+    "locationDataGenerated": "250 sensor nodes distributed across San Francisco, Oakland, and San Jose metropolitan area"
+  },
+  "provenance": {
+    "dataGenerationMethod": "Real-time IoT sensor measurements from PurpleAir PA-II-SD sensors measuring PM2.5, PM10, temperature, humidity. Sensors transmit readings every 60 seconds via 4G/LTE to MQTT broker. Each sensor GPS-calibrated for location accuracy ±5 meters.",
+    "dateDataGenerated": "2024-01-01T00:00:00Z",
+    "dataType": "Time series",
+    "dataFormat": "JSON stream via MQTT, schema: {timestamp: ISO8601, sensor_id: UUID, location: {lat: float, lon: float}, pm25: float (μg/m³), pm10: float (μg/m³), temperature: float (°C), humidity: float (%), battery: float (V)}",
+    "dataSubjectivity": "Objective - direct physical measurements. However, PM readings affected by sensor placement (e.g., near roads vs. parks), calibration drift over time, and environmental interference (rain, fog)",
+    "qualityIndicators": {
+      "samplingRate": "60-second intervals per sensor",
+      "uptime": "97.3% average uptime across sensor network",
+      "calibrationFrequency": "Quarterly calibration against EPA reference monitors",
+      "spatialCoverage": "Average 0.8km between sensors in urban core, 2.5km in suburban areas",
+      "measurementAccuracy": "±10% for PM2.5, ±15% for PM10 compared to EPA reference monitors",
+      "dataGaps": "2.7% missing data due to sensor maintenance, network outages, and battery failures"
+    },
+    "dataProcessingSteps": [
+      "Raw sensor readings ingested via MQTT broker",
+      "Timestamp normalization to UTC",
+      "Outlier detection: reject readings outside 3 sigma from 24-hour rolling mean",
+      "Calibration correction: apply linear correction factors from quarterly EPA reference comparisons",
+      "Geofencing: reject readings with GPS accuracy > 50 meters",
+      "Battery-level filtering: mark readings with battery < 3.2V as low-quality",
+      "Data aggregation: hourly averages computed for public dashboard"
+    ]
+  },
+  "use": {
+    "intendedUse": "Public health monitoring, air quality forecasting models, environmental policy analysis, academic research on urban air pollution patterns. Data powers public air quality dashboard and mobile apps for residents.",
+    "restrictions": "Public domain for non-commercial and research use. Commercial use (e.g., real estate analytics, targeted advertising) requires licensing agreement. Cannot be used to identify individual residents or infer private behavior patterns.",
+    "legalRightsToUse": "Data collected with city government authorization. Sensor placements on public property and consenting private property. Complies with California IoT Privacy Law (SB-327). No personal data collected.",
+    "privacyMeasures": "Sensors located only in public spaces or with explicit property owner consent. Precise GPS coordinates (±5m) not publicly disclosed - published maps use 100m grid aggregation to prevent address-level identification. No camera or audio sensors. Data retention: raw data 90 days, aggregated data indefinite.",
+    "sensitiveData": false,
+    "sensitiveDataCategories": [],
+    "dataProcessingLocation": "Data ingestion: AWS us-west-1. Real-time processing: Kafka clusters in us-west-1. Long-term storage: S3 buckets in us-west-1 with cross-region replication to us-east-1. All data remains within US borders per municipal data governance policy."
+  },
+  "_comments": {
+    "why_this_matters": "IoT sensor data raises location privacy concerns even without personal identifiers. Must document spatial precision, retention policies, and processing locations for GDPR/CCPA compliance.",
+    "key_challenges": "Sensor calibration drift over time, handling missing data from network outages, balancing spatial precision with privacy protection, managing data volume (250 sensors × 60 readings/hour × 24 hours = 360K records/day)",
+    "real_world_use": "Similar to PurpleAir network data used by EPA, academic researchers, and air quality apps like AirNow. Provenance documentation enables data sharing with research institutions while maintaining privacy commitments to residents."
+  }
+}

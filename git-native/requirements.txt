@@ -1,0 +1,17 @@
+GitPython>=3.1.0
+click>=8.0.0
+rich>=13.0.0
+jsonschema>=4.0.0
+networkx>=3.0
+
+# Optional dependencies
+# For visualization:
+# pygraphviz>=1.11
+# matplotlib>=3.7.0
+
+# For development:
+# pytest>=7.0.0
+# pytest-cov>=4.0.0
+# black>=23.0.0
+# mypy>=1.0.0
+# ruff>=0.1.0
