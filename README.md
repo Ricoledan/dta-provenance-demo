@@ -600,17 +600,3 @@ A: DVC focuses on versioning large files efficiently. This project focuses on me
 A: The DTA standards align well with EU AI Act requirements for high-risk AI systems. See [docs/DTA_STANDARDS.md](docs/DTA_STANDARDS.md) for regulatory mapping.
 
 ---
-
-## Star History
-
-If you find this project useful, please consider starring it on GitHub! ⭐
-
----
-
-<div align="center">
-
-**Built with ❤️ using official [Data & Trust Alliance](https://www.dtaalliance.org/) standards**
-
-[Report Bug](https://github.com/yourusername/dta-provenance-demo/issues) • [Request Feature](https://github.com/yourusername/dta-provenance-demo/issues)
-
-</div>
