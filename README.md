@@ -4,9 +4,10 @@
 
 **Production-quality implementations of Data & Trust Alliance provenance standards**
 
-[![Tests](https://img.shields.io/badge/tests-passing-brightgreen)](.)
+[![Tests](https://github.com/Ricoledan/dta-provenance-demo/actions/workflows/test.yml/badge.svg)](https://github.com/Ricoledan/dta-provenance-demo/actions/workflows/test.yml)
+[![Documentation](https://github.com/Ricoledan/dta-provenance-demo/actions/workflows/docs.yml/badge.svg)](https://github.com/Ricoledan/dta-provenance-demo/actions/workflows/docs.yml)
 [![Python](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![Solidity](https://img.shields.io/badge/solidity-0.8.x-orange.svg)](https://soliditylang.org/)
+[![Node](https://img.shields.io/badge/node-18%2B-brightgreen.svg)](https://nodejs.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![DTA Standards](https://img.shields.io/badge/DTA-v1.0.0-purple.svg)](https://github.com/Data-and-Trust-Alliance)
 
