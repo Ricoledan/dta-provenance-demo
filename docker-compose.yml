@@ -1,0 +1,87 @@
+version: '3.8'
+
+services:
+  # Git-native provenance tracking
+  git-native:
+    build:
+      context: .
+      dockerfile: Dockerfile.git-native
+    image: dta-provenance:git-native
+    container_name: dta-git-native
+    volumes:
+      - ./standards:/app/standards:ro
+      - ./git-native:/app/git-native
+      - git-data:/data
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: tail -f /dev/null  # Keep container running
+    networks:
+      - dta-network
+
+  # Blockchain provenance registry
+  blockchain:
+    build:
+      context: .
+      dockerfile: Dockerfile.blockchain
+    image: dta-provenance:blockchain
+    container_name: dta-blockchain
+    ports:
+      - "8545:8545"  # Hardhat node JSON-RPC
+    volumes:
+      - ./blockchain:/app/blockchain
+      - blockchain-data:/app/blockchain/cache
+    environment:
+      - NODE_ENV=development
+    networks:
+      - dta-network
+    healthcheck:
+      test: ["CMD", "npx", "hardhat", "--version"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Jupyter notebook for interactive demos
+  jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile.git-native
+    image: dta-provenance:jupyter
+    container_name: dta-jupyter
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/app
+      - jupyter-data:/root/.jupyter
+    command: >
+      sh -c "pip install jupyter notebook ipywidgets &&
+             jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+             --NotebookApp.token='' --NotebookApp.password=''"
+    networks:
+      - dta-network
+
+networks:
+  dta-network:
+    driver: bridge
+
+volumes:
+  git-data:
+  blockchain-data:
+  jupyter-data:
+
+# Usage:
+# Start all services:       docker-compose up -d
+# Stop all services:        docker-compose down
+# View logs:                docker-compose logs -f
+#
+# Access services:
+# - Jupyter:                http://localhost:8888
+# - Blockchain RPC:         http://localhost:8545
+# - Git-native CLI:         docker-compose exec git-native dta-provenance --help
+#
+# Run tests:
+# - Git-native:             docker-compose exec git-native pytest
+# - Blockchain:             docker-compose exec blockchain npx hardhat test
+#
+# Interactive shells:
+# - Git-native:             docker-compose exec git-native /bin/bash
+# - Blockchain:             docker-compose exec blockchain /bin/bash

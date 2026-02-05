@@ -1,0 +1,38 @@
+# Dockerfile for Blockchain Provenance Registry
+FROM node:20-slim
+
+LABEL maintainer="DTA Provenance Demo"
+LABEL description="Blockchain provenance tracking with Hardhat and Solidity"
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    python3 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy blockchain implementation
+COPY blockchain/package.json blockchain/package-lock.json* /app/blockchain/
+COPY blockchain/ /app/blockchain/
+
+# Install Node dependencies
+RUN cd /app/blockchain && npm ci
+
+# Expose Hardhat node port
+EXPOSE 8545
+
+# Default command (start local blockchain node)
+CMD ["npx", "hardhat", "node"]
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s \
+    CMD npx hardhat --version || exit 1
+
+# Usage examples (add to README):
+# Build: docker build -f Dockerfile.blockchain -t dta-provenance:blockchain .
+# Run node: docker run -p 8545:8545 dta-provenance:blockchain
+# Run tests: docker run dta-provenance:blockchain npx hardhat test
+# Interactive: docker run -it --entrypoint /bin/bash dta-provenance:blockchain
+# Deploy: docker run dta-provenance:blockchain npx hardhat run scripts/deploy.js --network localhost

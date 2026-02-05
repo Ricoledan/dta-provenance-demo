@@ -1,0 +1,42 @@
+# Dockerfile for Git-Native Provenance Tracking
+FROM python:3.11-slim
+
+LABEL maintainer="DTA Provenance Demo"
+LABEL description="Git-native provenance tracking with DTA standards"
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy git-native implementation
+COPY git-native/ /app/git-native/
+COPY standards/ /app/standards/
+
+# Install Python dependencies
+RUN cd /app/git-native && \
+    pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir -e .
+
+# Configure git (required for commits)
+RUN git config --global user.name "DTA Demo User" && \
+    git config --global user.email "demo@example.com"
+
+# Set Python path
+ENV PYTHONPATH=/app/git-native:$PYTHONPATH
+
+# Default command
+CMD ["dta-provenance", "--help"]
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s \
+    CMD dta-provenance --version || exit 1
+
+# Usage examples (add to README):
+# Build: docker build -f Dockerfile.git-native -t dta-provenance:git-native .
+# Run: docker run -it dta-provenance:git-native
+# Interactive: docker run -it --entrypoint /bin/bash dta-provenance:git-native
+# Validate: docker run -v $(pwd)/standards/examples:/data dta-provenance:git-native dta-provenance validate /data/healthcare-imaging.json
