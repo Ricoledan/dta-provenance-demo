@@ -11,6 +11,8 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![DTA Standards](https://img.shields.io/badge/DTA-v1.0.0-purple.svg)](https://github.com/Data-and-Trust-Alliance)
 
+📚 **[View Full Documentation](https://ricoledan.github.io/dta-provenance-demo)**
+
 [Quick Start](#quick-start) • [Documentation](#documentation) • [Examples](#examples) • [Comparison](#comparison)
 
 </div>
