@@ -117,7 +117,7 @@ This project is maintained by open-source contributors. See [GitHub contributors
 
 ### How to Contribute
 
-We welcome contributions! See our [Contributing Guide](contributing.md) for:
+We welcome contributions! See our [Contributing Guide](CONTRIBUTING.md) for:
 - Code contributions
 - Documentation improvements
 - Bug reports

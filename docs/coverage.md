@@ -172,7 +172,7 @@ Coverage is automatically:
 - Reported in PR comments
 - Uploaded to Codecov (optional)
 
-See [`.github/workflows/test.yml`](../.github/workflows/test.yml).
+See [`.github/workflows/test.yml`](https://github.com/Ricoledan/dta-provenance-demo/blob/main/.github/workflows/test.yml).
 
 ### Coverage Badges
 
@@ -254,4 +254,4 @@ PRs must:
 
 ---
 
-**Help improve coverage!** See [Contributing Guide](contributing.md).
+**Help improve coverage!** See [Contributing Guide](CONTRIBUTING.md).

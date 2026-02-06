@@ -37,7 +37,7 @@ The DTA standards v1.0.0 define 22 fields organized into three categories:
 - **PROVENANCE** (6 fields): How data was created
 - **USE** (8 fields): How data should be used
 
-See [DTA Standards Guide](dta-standards.md) for full details.
+See [DTA Standards Guide](DTA_STANDARDS.md) for full details.
 
 ## Technical Questions
 
@@ -59,7 +59,7 @@ See [DTA Standards Guide](dta-standards.md) for full details.
 - ⚠️ Public transparency valuable
 - ⚠️ Update frequency low enough
 
-See [detailed comparison](comparison.md).
+See [detailed comparison](COMPARISON.md).
 
 ### Is this production-ready?
 
@@ -136,7 +136,7 @@ The EU AI Act requires training data provenance for high-risk AI systems. The DT
 - Bias assessment
 - Privacy measures
 
-See [DTA Standards Guide](dta-standards.md) for regulatory mapping.
+See [DTA Standards Guide](DTA_STANDARDS.md) for regulatory mapping.
 
 ### Can this be used for FDA submissions?
 
@@ -154,7 +154,7 @@ The provenance tracking provides documentation useful for FDA AI/ML submissions:
 
 1. [Install](installation.md) the tools (Nix, Docker, or manual)
 2. Follow the [Quick Start Guide](quickstart.md)
-3. Try the [Interactive Jupyter Notebook](../DTA_Provenance_Demo.ipynb)
+3. Try the [Interactive Jupyter Notebook](https://github.com/Ricoledan/dta-provenance-demo/blob/main/DTA_Provenance_Demo.ipynb)
 4. Explore [real-world examples](examples/healthcare.md)
 
 ### Can I modify the DTA standards?
@@ -201,13 +201,13 @@ Yes! The GitHub Actions workflow shows integration:
     fi
 ```
 
-See [GitHub Actions workflow](../.github/workflows/test.yml).
+See [GitHub Actions workflow](https://github.com/Ricoledan/dta-provenance-demo/blob/main/.github/workflows/test.yml).
 
 ## Community Questions
 
 ### How can I contribute?
 
-See the [Contributing Guide](contributing.md) for:
+See the [Contributing Guide](CONTRIBUTING.md) for:
 - Code contributions
 - Documentation improvements
 - Bug reports

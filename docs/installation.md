@@ -231,7 +231,7 @@ Configure Python interpreter to use the virtual environment or Nix shell.
 ## Next Steps
 
 - [Quick Start Guide](quickstart.md)
-- [DTA Standards Overview](dta-standards.md)
+- [DTA Standards Overview](DTA_STANDARDS.md)
 - [Basic Usage Tutorial](tutorials/basic-usage.md)
 - [API Reference](tutorials/api-reference.md)
 
@@ -239,4 +239,4 @@ Configure Python interpreter to use the virtual environment or Nix shell.
 
 - **Issues**: [GitHub Issues](https://github.com/Ricoledan/dta-provenance-demo/issues)
 - **Documentation**: [Full Documentation](https://ricoledan.github.io/dta-provenance-demo)
-- **Contributing**: [Contributing Guide](contributing.md)
+- **Contributing**: [Contributing Guide](CONTRIBUTING.md)

@@ -113,7 +113,7 @@ docker-compose exec blockchain npx hardhat test
 
 ## CI/CD Testing
 
-Tests run automatically on every push via GitHub Actions. See [`.github/workflows/test.yml`](../.github/workflows/test.yml).
+Tests run automatically on every push via GitHub Actions. See [`.github/workflows/test.yml`](https://github.com/Ricoledan/dta-provenance-demo/blob/main/.github/workflows/test.yml).
 
 ### Test Matrix
 
@@ -288,6 +288,6 @@ blockchain/test/
 
 ## Next Steps
 
-- [Contributing Guide](contributing.md) - How to contribute
+- [Contributing Guide](CONTRIBUTING.md) - How to contribute
 - [Coverage Report](coverage.md) - View detailed coverage
-- [CI/CD Workflow](../.github/workflows/test.yml) - See automation
+- [CI/CD Workflow](https://github.com/Ricoledan/dta-provenance-demo/blob/main/.github/workflows/test.yml) - See automation

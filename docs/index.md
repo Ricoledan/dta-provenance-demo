@@ -16,7 +16,7 @@
 
     Comprehensive guides, API reference, and examples
 
-    [:octicons-arrow-right-24: Read the Docs](dta-standards.md)
+    [:octicons-arrow-right-24: Read the Docs](DTA_STANDARDS.md)
 
 -   :material-docker:{ .lg .middle } __Docker Support__
 
@@ -143,17 +143,17 @@ Anonymized payment data with multi-layer privacy protection and risk assessment.
 | High-frequency updates | **Git-Native** ✅ | No gas fees, instant commits |
 | Public transparency | **Blockchain** ✅ | Immutable, publicly verifiable |
 
-[Full Comparison →](comparison.md)
+[Full Comparison →](COMPARISON.md)
 
 ## Quick Links
 
 <div class="grid" markdown>
 
 - [**Installation Guide**](installation.md)
-- [**DTA Standards Explained**](dta-standards.md)
-- [**Architecture Overview**](architecture.md)
+- [**DTA Standards Explained**](DTA_STANDARDS.md)
+- [**Architecture Overview**](ARCHITECTURE.md)
 - [**API Reference**](tutorials/api-reference.md)
-- [**Contributing Guidelines**](contributing.md)
+- [**Contributing Guidelines**](CONTRIBUTING.md)
 - [**FAQ**](faq.md)
 
 </div>
