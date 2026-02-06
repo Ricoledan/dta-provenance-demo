@@ -567,18 +567,25 @@ Consider blockchain only if ALL of these apply:
 
 ## Roadmap
 
-Future enhancements planned:
+### ✅ Completed
 
-- [ ] GitHub Pages documentation site
-- [ ] Interactive Jupyter notebook demo
+- [x] **GitHub Pages documentation site** - Live at [ricoledan.github.io/dta-provenance-demo](https://ricoledan.github.io/dta-provenance-demo)
+- [x] **Interactive Jupyter notebook demo** - Complete tutorial with real-world examples
+- [x] **GitHub Action for automated provenance checks** - Full CI/CD with tests, linting, and deployment
+- [x] **Docker containers for easy deployment** - Docker Compose setup with Git-native, Blockchain, and Jupyter
+- [x] **Comprehensive test coverage** - 59 tests across Python and Solidity with automated CI
+- [x] **Documentation linting and preview tools** - Local preview with `mkdocs serve` and automated link checking
+
+### 🚧 Future Enhancements
+
 - [ ] MLflow integration example
-- [ ] GitHub Action for automated provenance checks
 - [ ] VS Code extension for provenance validation
-- [ ] Docker containers for easy deployment
 - [ ] Additional blockchain networks (Polygon, Arbitrum)
 - [ ] Frontend dashboard for visualization
 - [ ] Integration with DVC (Data Version Control)
 - [ ] SBOM (Software Bill of Materials) integration
+- [ ] Pre-commit hooks for automated validation
+- [ ] API server for provenance queries
 
 ---
 
