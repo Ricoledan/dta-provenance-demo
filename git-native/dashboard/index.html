@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DTA Provenance Dashboard</title>
+    <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <div class="container">
+                <h1>DTA Provenance Dashboard</h1>
+                <p class="subtitle">Git-Native Data Provenance Tracking</p>
+            </div>
+        </header>
+
+        <main class="container">
+            <!-- Provenance Lookup Section -->
+            <section id="lookup-section" class="card">
+                <h2>Provenance Lookup</h2>
+                <div id="provenance-viewer"></div>
+            </section>
+
+            <!-- Audit Trail Section -->
+            <section id="audit-section" class="card">
+                <h2>Audit Trail</h2>
+                <div id="audit-trail"></div>
+            </section>
+
+            <!-- Lineage Graph Section -->
+            <section id="lineage-section" class="card">
+                <h2>Lineage Graph</h2>
+                <div id="lineage-graph"></div>
+            </section>
+
+            <!-- Validator Section -->
+            <section id="validator-section" class="card">
+                <h2>Metadata Validator</h2>
+                <div id="validator"></div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="container">
+                <p>DTA Provenance Dashboard v1.0.0 |
+                   <a href="https://www.dtaalliance.org/" target="_blank">Data & Trust Alliance</a>
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>

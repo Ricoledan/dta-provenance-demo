@@ -7,6 +7,15 @@
     "test": "hardhat test",
     "test:gas": "REPORT_GAS=true hardhat test",
     "deploy:local": "hardhat run scripts/deploy.js --network localhost",
+    "deploy:polygon": "hardhat run scripts/deploy-with-verify.js --network polygon",
+    "deploy:polygon-amoy": "hardhat run scripts/deploy-with-verify.js --network polygonAmoy",
+    "deploy:arbitrum": "hardhat run scripts/deploy-with-verify.js --network arbitrum",
+    "deploy:arbitrum-sepolia": "hardhat run scripts/deploy-with-verify.js --network arbitrumSepolia",
+    "interact:local": "hardhat run scripts/interact.js --network localhost",
+    "interact:polygon": "hardhat run scripts/interact.js --network polygon",
+    "interact:polygon-amoy": "hardhat run scripts/interact.js --network polygonAmoy",
+    "interact:arbitrum": "hardhat run scripts/interact.js --network arbitrum",
+    "interact:arbitrum-sepolia": "hardhat run scripts/interact.js --network arbitrumSepolia",
     "node": "hardhat node",
     "compile": "hardhat compile",
     "clean": "hardhat clean"
@@ -19,15 +28,17 @@
     "dta",
     "smart-contracts"
   ],
-  "author": "Your Name",
+  "author": "Ricardo Ledan",
   "license": "MIT",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "@nomicfoundation/hardhat-verify": "^2.0.0",
     "hardhat": "^2.19.0",
     "hardhat-gas-reporter": "^1.0.9"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^5.0.0",
+    "dotenv": "^16.3.1",
     "ethers": "^6.9.0"
   }
 }

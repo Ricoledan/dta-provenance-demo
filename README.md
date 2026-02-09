@@ -132,6 +132,34 @@ npx hardhat test
 npx hardhat test --gas-report
 ```
 
+### Blockchain Deployment (Polygon/Arbitrum)
+
+Deploy to production-ready L2 networks with much lower gas costs:
+
+```bash
+# Configure your environment
+cd blockchain
+cp .env.example .env
+# Edit .env with your private key and RPC URLs
+
+# Deploy to Polygon Amoy testnet (free)
+npm run deploy:polygon-amoy
+
+# Deploy to Arbitrum Sepolia testnet (free)
+npm run deploy:arbitrum-sepolia
+
+# Interact with deployed contract
+npm run interact:polygon-amoy
+```
+
+Supported networks:
+- **Polygon** (Mainnet) - ~$0.01 per transaction
+- **Polygon Amoy** (Testnet) - Free
+- **Arbitrum One** (Mainnet) - ~$0.01 per transaction
+- **Arbitrum Sepolia** (Testnet) - Free
+
+See [Blockchain Networks Tutorial](https://ricoledan.github.io/dta-provenance-demo/tutorials/blockchain-networks/) for complete deployment guide.
+
 ---
 
 ## Examples
@@ -578,14 +606,14 @@ Consider blockchain only if ALL of these apply:
 
 ### 🚧 Future Enhancements
 
-- [ ] MLflow integration example
-- [ ] VS Code extension for provenance validation
-- [ ] Additional blockchain networks (Polygon, Arbitrum)
-- [ ] Frontend dashboard for visualization
-- [ ] Integration with DVC (Data Version Control)
-- [ ] SBOM (Software Bill of Materials) integration
-- [ ] Pre-commit hooks for automated validation
-- [ ] API server for provenance queries
+- [x] **Pre-commit hooks for automated validation** - Validate provenance files and commit trailers automatically
+- [x] **Integration with DVC (Data Version Control)** - Track data versions with provenance metadata
+- [x] **SBOM (Software Bill of Materials) integration** - Generate CycloneDX SBOMs with provenance tracking
+- [x] **MLflow integration** - Bidirectional linking between Git commits and MLflow experiment runs
+- [x] **Additional blockchain networks (Polygon, Arbitrum)** - Deploy to L2 networks with low gas costs
+- [x] **API server for provenance queries** - REST API with FastAPI for programmatic access
+- [x] **VS Code extension for provenance validation** - Real-time validation, Git integration, and code snippets
+- [x] **Frontend dashboard for visualization** - Interactive web UI with D3.js lineage graphs
 
 ---
 

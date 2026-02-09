@@ -86,6 +86,14 @@ nav:
     - Git vs Blockchain: COMPARISON.md
   - Tutorials:
     - Basic Usage: tutorials/basic-usage.md
+    - Pre-commit Hooks: tutorials/pre-commit-hooks.md
+    - DVC Integration: tutorials/dvc-integration.md
+    - MLflow Integration: tutorials/mlflow-integration.md
+    - SBOM Integration: tutorials/sbom-integration.md
+    - Blockchain Networks: tutorials/blockchain-networks.md
+    - VS Code Extension: tutorials/vscode-extension.md
+    - API Server: tutorials/api-server.md
+    - Frontend Dashboard: tutorials/dashboard.md
     - API Reference: tutorials/api-reference.md
   - Examples:
     - Healthcare Imaging: examples/healthcare.md

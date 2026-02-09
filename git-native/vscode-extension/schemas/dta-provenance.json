@@ -1,0 +1,170 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://dtaalliance.org/schemas/provenance/v1.0.0.json",
+  "title": "DTA Data Provenance Standards v1.0.0",
+  "description": "JSON Schema for Data & Trust Alliance Data Provenance Standards v1.0.0",
+  "type": "object",
+  "required": ["source", "provenance", "use"],
+  "properties": {
+    "source": {
+      "type": "object",
+      "description": "Information about the origin and provider of the data",
+      "required": ["datasetName", "providerName"],
+      "properties": {
+        "datasetName": {
+          "type": "string",
+          "description": "Name of the dataset",
+          "minLength": 1
+        },
+        "datasetVersion": {
+          "type": "string",
+          "description": "Version of the dataset",
+          "pattern": "^\\d+\\.\\d+(\\.\\d+)?$"
+        },
+        "datasetURI": {
+          "type": "string",
+          "description": "Persistent identifier or location of the dataset",
+          "format": "uri"
+        },
+        "providerName": {
+          "type": "string",
+          "description": "Name of the organization or individual providing the data",
+          "minLength": 1
+        },
+        "providerWebsite": {
+          "type": "string",
+          "description": "Website of the data provider",
+          "format": "uri"
+        },
+        "dateAcquired": {
+          "type": "string",
+          "description": "Date when the dataset was acquired (ISO 8601 format)",
+          "format": "date-time"
+        },
+        "geographicSourceOfData": {
+          "type": "string",
+          "description": "Geographic origin of the data"
+        },
+        "contactInformation": {
+          "type": "string",
+          "description": "Contact information for the data provider"
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "description": "Information about how the data was generated and processed",
+      "required": [
+        "dataGenerationMethod",
+        "dateDataGenerated",
+        "dataType",
+        "dataFormat"
+      ],
+      "properties": {
+        "dataGenerationMethod": {
+          "type": "string",
+          "description": "Method used to generate or collect the data",
+          "minLength": 1
+        },
+        "dateDataGenerated": {
+          "type": "string",
+          "description": "Date when the data was generated (ISO 8601 format)",
+          "format": "date-time"
+        },
+        "dataType": {
+          "type": "string",
+          "description": "Type of data",
+          "enum": [
+            "Text",
+            "Image",
+            "Audio",
+            "Video",
+            "Time series",
+            "Tabular",
+            "Graph",
+            "Geospatial",
+            "Multi-modal"
+          ]
+        },
+        "dataFormat": {
+          "type": "string",
+          "description": "Format of the data (e.g., CSV, JSON, Parquet)",
+          "minLength": 1
+        },
+        "processingSteps": {
+          "type": "array",
+          "description": "List of processing steps applied to the data",
+          "items": {
+            "type": "string"
+          }
+        },
+        "qualityIndicators": {
+          "type": "object",
+          "description": "Metrics indicating data quality",
+          "additionalProperties": true
+        }
+      }
+    },
+    "use": {
+      "type": "object",
+      "description": "Information about how the data can be used",
+      "required": ["intendedUse", "legalRightsToUse", "sensitiveData"],
+      "properties": {
+        "intendedUse": {
+          "type": "string",
+          "description": "Intended purpose of the data",
+          "minLength": 1
+        },
+        "legalRightsToUse": {
+          "type": "string",
+          "description": "Legal basis for using the data",
+          "minLength": 1
+        },
+        "restrictions": {
+          "type": "array",
+          "description": "Any restrictions on data use",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sensitiveData": {
+          "type": "boolean",
+          "description": "Whether the data contains sensitive information"
+        },
+        "sensitiveDataCategories": {
+          "type": "array",
+          "description": "Categories of sensitive data (required if sensitiveData is true)",
+          "items": {
+            "type": "string"
+          }
+        },
+        "privacyMeasures": {
+          "type": "array",
+          "description": "Privacy protection measures applied",
+          "items": {
+            "type": "string"
+          }
+        },
+        "retentionPolicy": {
+          "type": "string",
+          "description": "Data retention policy"
+        },
+        "attribution": {
+          "type": "string",
+          "description": "Required attribution for the data"
+        }
+      },
+      "if": {
+        "properties": {
+          "sensitiveData": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "required": ["sensitiveDataCategories"]
+      }
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,25 @@
+{
+  "name": "dta-provenance-dashboard",
+  "version": "1.0.0",
+  "description": "Frontend dashboard for DTA provenance tracking",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "d3": "^7.9.0"
+  },
+  "devDependencies": {
+    "vite": "^5.4.11"
+  },
+  "keywords": [
+    "provenance",
+    "dashboard",
+    "dta",
+    "data-lineage"
+  ],
+  "author": "DTA Provenance Team",
+  "license": "MIT"
+}

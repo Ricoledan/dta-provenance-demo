@@ -1,0 +1,123 @@
+{
+  "DTA Provenance Template": {
+    "prefix": "dta-template",
+    "description": "Complete DTA v1.0.0 provenance metadata template",
+    "body": [
+      "{",
+      "  \"source\": {",
+      "    \"datasetName\": \"${1:Dataset Name}\",",
+      "    \"datasetVersion\": \"${2:1.0.0}\",",
+      "    \"datasetURI\": \"${3:https://example.com/dataset}\",",
+      "    \"providerName\": \"${4:Provider Name}\",",
+      "    \"providerWebsite\": \"${5:https://example.com}\",",
+      "    \"dateAcquired\": \"${6:2024-01-15T00:00:00Z}\",",
+      "    \"geographicSourceOfData\": \"${7:United States}\",",
+      "    \"contactInformation\": \"${8:contact@example.com}\"",
+      "  },",
+      "  \"provenance\": {",
+      "    \"dataGenerationMethod\": \"${9:SQL export}\",",
+      "    \"dateDataGenerated\": \"${10:2024-01-15T00:00:00Z}\",",
+      "    \"dataType\": \"${11|Text,Image,Audio,Video,Time series,Tabular,Graph,Geospatial,Multi-modal|}\",",
+      "    \"dataFormat\": \"${12:CSV}\",",
+      "    \"processingSteps\": [",
+      "      \"${13:Step 1}\"",
+      "    ],",
+      "    \"qualityIndicators\": {",
+      "      \"completeness\": ${14:0.95},",
+      "      \"accuracy\": ${15:0.98}",
+      "    }",
+      "  },",
+      "  \"use\": {",
+      "    \"intendedUse\": \"${16:ML model training}\",",
+      "    \"legalRightsToUse\": \"${17:Internal use only}\",",
+      "    \"restrictions\": [",
+      "      \"${18:No redistribution}\"",
+      "    ],",
+      "    \"sensitiveData\": ${19|true,false|},",
+      "    \"privacyMeasures\": [",
+      "      \"${20:Anonymization}\"",
+      "    ],",
+      "    \"retentionPolicy\": \"${21:5 years}\",",
+      "    \"attribution\": \"${22:Provider Name, 2024}\"",
+      "  }",
+      "}"
+    ]
+  },
+  "DTA Source Section": {
+    "prefix": "dta-source",
+    "description": "DTA source metadata section",
+    "body": [
+      "\"source\": {",
+      "  \"datasetName\": \"${1:Dataset Name}\",",
+      "  \"datasetVersion\": \"${2:1.0.0}\",",
+      "  \"datasetURI\": \"${3:https://example.com/dataset}\",",
+      "  \"providerName\": \"${4:Provider Name}\",",
+      "  \"providerWebsite\": \"${5:https://example.com}\",",
+      "  \"dateAcquired\": \"${6:2024-01-15T00:00:00Z}\",",
+      "  \"geographicSourceOfData\": \"${7:United States}\",",
+      "  \"contactInformation\": \"${8:contact@example.com}\"",
+      "}"
+    ]
+  },
+  "DTA Provenance Section": {
+    "prefix": "dta-provenance",
+    "description": "DTA provenance metadata section",
+    "body": [
+      "\"provenance\": {",
+      "  \"dataGenerationMethod\": \"${1:SQL export}\",",
+      "  \"dateDataGenerated\": \"${2:2024-01-15T00:00:00Z}\",",
+      "  \"dataType\": \"${3|Text,Image,Audio,Video,Time series,Tabular,Graph,Geospatial,Multi-modal|}\",",
+      "  \"dataFormat\": \"${4:CSV}\",",
+      "  \"processingSteps\": [",
+      "    \"${5:Step 1}\"",
+      "  ],",
+      "  \"qualityIndicators\": {",
+      "    \"completeness\": ${6:0.95},",
+      "    \"accuracy\": ${7:0.98}",
+      "  }",
+      "}"
+    ]
+  },
+  "DTA Use Section": {
+    "prefix": "dta-use",
+    "description": "DTA use metadata section",
+    "body": [
+      "\"use\": {",
+      "  \"intendedUse\": \"${1:ML model training}\",",
+      "  \"legalRightsToUse\": \"${2:Internal use only}\",",
+      "  \"restrictions\": [",
+      "    \"${3:No redistribution}\"",
+      "  ],",
+      "  \"sensitiveData\": ${4|true,false|},",
+      "  \"privacyMeasures\": [",
+      "    \"${5:Anonymization}\"",
+      "  ],",
+      "  \"retentionPolicy\": \"${6:5 years}\",",
+      "  \"attribution\": \"${7:Provider Name, 2024}\"",
+      "}"
+    ]
+  },
+  "DTA Minimal Template": {
+    "prefix": "dta-minimal",
+    "description": "Minimal DTA provenance template (required fields only)",
+    "body": [
+      "{",
+      "  \"source\": {",
+      "    \"datasetName\": \"${1:Dataset Name}\",",
+      "    \"providerName\": \"${2:Provider Name}\"",
+      "  },",
+      "  \"provenance\": {",
+      "    \"dataGenerationMethod\": \"${3:Method}\",",
+      "    \"dateDataGenerated\": \"${4:2024-01-15T00:00:00Z}\",",
+      "    \"dataType\": \"${5|Text,Image,Audio,Video,Time series,Tabular,Graph,Geospatial,Multi-modal|}\",",
+      "    \"dataFormat\": \"${6:CSV}\"",
+      "  },",
+      "  \"use\": {",
+      "    \"intendedUse\": \"${7:Purpose}\",",
+      "    \"legalRightsToUse\": \"${8:Rights}\",",
+      "    \"sensitiveData\": ${9|false,true|}",
+      "  }",
+      "}"
+    ]
+  }
+}

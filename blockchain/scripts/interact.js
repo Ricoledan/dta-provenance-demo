@@ -1,18 +1,63 @@
 const hre = require("hardhat");
 const crypto = require("crypto");
+const fs = require("fs");
+const path = require("path");
 
 async function main() {
   // Get signers
   const [deployer] = await hre.ethers.getSigners();
   console.log("Interacting with contract using account:", deployer.address);
 
-  // Deploy the contract (or use existing address)
+  const networkName = hre.network.name;
   const ProvenanceRegistry = await hre.ethers.getContractFactory("ProvenanceRegistry");
-  const registry = await ProvenanceRegistry.deploy();
-  await registry.waitForDeployment();
-  const address = await registry.getAddress();
+  let registry;
+  let address;
 
-  console.log("Contract deployed at:", address);
+  // Try to read deployed address from deployments directory
+  const deploymentFile = path.join(__dirname, "..", "deployments", `${networkName}.json`);
+
+  if (fs.existsSync(deploymentFile)) {
+    const deploymentInfo = JSON.parse(fs.readFileSync(deploymentFile, "utf8"));
+    address = deploymentInfo.address;
+    console.log(`\n📋 Using existing deployment on ${networkName}:`);
+    console.log(`   Address: ${address}`);
+    console.log(`   Deployed: ${deploymentInfo.timestamp}`);
+    console.log(`   Block: ${deploymentInfo.blockNumber || "N/A"}`);
+
+    // Attach to existing contract
+    registry = ProvenanceRegistry.attach(address);
+  } else {
+    // Deploy new contract if no deployment found
+    console.log(`\n⚠️  No deployment found for ${networkName}`);
+    console.log("🚀 Deploying new contract...");
+
+    registry = await ProvenanceRegistry.deploy();
+    await registry.waitForDeployment();
+    address = await registry.getAddress();
+
+    console.log(`✅ Contract deployed at: ${address}`);
+
+    // Save deployment info
+    const deploymentsDir = path.join(__dirname, "..", "deployments");
+    if (!fs.existsSync(deploymentsDir)) {
+      fs.mkdirSync(deploymentsDir, { recursive: true });
+    }
+
+    const deploymentInfo = {
+      address: address,
+      network: networkName,
+      chainId: hre.network.config.chainId,
+      deployer: deployer.address,
+      timestamp: new Date().toISOString(),
+      blockNumber: registry.deploymentTransaction() ?
+        (await registry.deploymentTransaction().wait()).blockNumber : null,
+      txHash: registry.deploymentTransaction() ?
+        registry.deploymentTransaction().hash : null
+    };
+
+    fs.writeFileSync(deploymentFile, JSON.stringify(deploymentInfo, null, 2));
+    console.log(`💾 Deployment saved to: deployments/${networkName}.json`);
+  }
 
   // Example DTA metadata (simplified for demo)
   const dtaMetadata = {

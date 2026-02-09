@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  # API Service
+  api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    container_name: dta-provenance-api
+    ports:
+      - "8000:8000"
+    environment:
+      - REPO_PATH=/repo
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - .:/repo:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - dta-network
+
+  # Dashboard Service
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    container_name: dta-provenance-dashboard
+    ports:
+      - "3000:80"
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    networks:
+      - dta-network
+
+networks:
+  dta-network:
+    driver: bridge

@@ -340,5 +340,396 @@ def show(commit_hash, repo, output):
         sys.exit(1)
 
 
+@cli.command()
+@click.argument('files', nargs=-1, type=click.Path(exists=True), required=True)
+@click.option(
+    '--metadata',
+    '-m',
+    type=click.Path(exists=True),
+    help='Path to DTA provenance JSON file (will be enriched with DVC info)'
+)
+@click.option(
+    '--output',
+    '-o',
+    type=click.Path(),
+    help='Output path for enriched metadata (default: print to console)'
+)
+@click.option(
+    '--repo',
+    type=click.Path(exists=True),
+    default='.',
+    help='Git repository path (default: current directory)'
+)
+def dvc_track(files, metadata, output, repo):
+    """
+    Track files with DVC and enrich provenance metadata.
+
+    Adds files to DVC tracking and enriches DTA provenance metadata with
+    DVC hashes and version information for complete traceability.
+
+    Requires DVC to be installed: pip install 'dta-provenance[dvc]'
+
+    Example:
+
+        dta-provenance dvc-track dataset.csv \\
+            --metadata provenance.json \\
+            --output provenance-with-dvc.json
+    """
+    console.print("[bold blue]Tracking files with DVC...[/]")
+
+    try:
+        # Lazy import DVC integration
+        from .integrations.dvc_integration import DVCProvenanceBridge
+    except ImportError as e:
+        console.print(f"[red]Error: {e}[/]")
+        console.print("[yellow]Install with: pip install 'dta-provenance[dvc]'[/]")
+        sys.exit(1)
+
+    try:
+        bridge = DVCProvenanceBridge(Path(repo))
+
+        # Load existing metadata if provided
+        if metadata:
+            prov_metadata = load_provenance_file(Path(metadata))
+            metadata_dict = prov_metadata.to_dict()
+        else:
+            metadata_dict = {}
+
+        # Track each file
+        for file_path in files:
+            relative_path = Path(file_path).relative_to(repo)
+            console.print(f"[yellow]Tracking {relative_path} with DVC...[/]")
+
+            metadata_dict = bridge.track_dvc_file(relative_path, metadata_dict)
+            console.print(f"[green]✅ {relative_path} tracked[/]")
+
+        # Output enriched metadata
+        if output:
+            with open(output, 'w') as f:
+                json.dump(metadata_dict, f, indent=2)
+            console.print(f"[green]Enriched metadata saved to {output}[/]")
+        else:
+            syntax = Syntax(
+                json.dumps(metadata_dict, indent=2),
+                "json",
+                theme="monokai",
+                line_numbers=True
+            )
+            console.print(syntax)
+
+        console.print("\n[green]✅ DVC tracking complete[/]")
+        console.print("[cyan]Next steps:[/]")
+        console.print("  1. git add .dvc/config data.csv.dvc .gitignore")
+        console.print("  2. git commit -m 'Add DVC tracking'")
+
+    except Exception as e:
+        console.print(f"[red]Error: {e}[/]")
+        sys.exit(1)
+
+
+@cli.command()
+@click.option(
+    '--host',
+    default='127.0.0.1',
+    help='Host to bind the server (default: 127.0.0.1)'
+)
+@click.option(
+    '--port',
+    default=8000,
+    type=int,
+    help='Port to bind the server (default: 8000)'
+)
+@click.option(
+    '--reload',
+    is_flag=True,
+    help='Enable auto-reload for development'
+)
+@click.option(
+    '--repo',
+    type=click.Path(exists=True),
+    default='.',
+    help='Git repository path (default: current directory)'
+)
+def serve(host, port, reload, repo):
+    """
+    Start the FastAPI server for provenance queries.
+
+    Runs a REST API server that provides endpoints for querying provenance
+    metadata, generating audit trails, and validating DTA compliance.
+
+    Requires FastAPI and uvicorn: pip install 'dta-provenance[api]'
+
+    Example:
+
+        # Start server on default port 8000
+        dta-provenance serve
+
+        # Start with custom host and port
+        dta-provenance serve --host 0.0.0.0 --port 8080
+
+        # Start with auto-reload for development
+        dta-provenance serve --reload
+    """
+    console.print("[bold blue]Starting DTA Provenance API server...[/]")
+
+    try:
+        # Lazy import FastAPI and uvicorn
+        try:
+            import uvicorn
+            from .api import create_app
+        except ImportError:
+            console.print("[red]Error: FastAPI and uvicorn are required[/]")
+            console.print("[yellow]Install with: pip install 'dta-provenance[api]'[/]")
+            sys.exit(1)
+
+        # Create app
+        app = create_app(Path(repo))
+
+        # Display server info
+        panel = Panel(
+            f"[cyan]Host: {host}[/]\n"
+            f"[cyan]Port: {port}[/]\n"
+            f"[cyan]Repository: {Path(repo).absolute()}[/]\n"
+            f"[cyan]Docs: http://{host}:{port}/docs[/]\n"
+            f"[cyan]ReDoc: http://{host}:{port}/redoc[/]",
+            title="🚀 API Server Configuration",
+            border_style="blue"
+        )
+        console.print(panel)
+
+        # Run server
+        uvicorn.run(
+            app,
+            host=host,
+            port=port,
+            reload=reload,
+            log_level="info"
+        )
+
+    except KeyboardInterrupt:
+        console.print("\n[yellow]Server stopped[/]")
+    except Exception as e:
+        console.print(f"[red]Error: {e}[/]")
+        sys.exit(1)
+
+
+@cli.command()
+@click.option(
+    '--project-name',
+    '-n',
+    required=True,
+    help='Name of the project'
+)
+@click.option(
+    '--project-version',
+    '-v',
+    default='1.0.0',
+    help='Version of the project (default: 1.0.0)'
+)
+@click.option(
+    '--metadata',
+    '-m',
+    type=click.Path(exists=True),
+    help='Path to DTA provenance JSON file (will be enriched with SBOM info)'
+)
+@click.option(
+    '--output',
+    '-o',
+    type=click.Path(),
+    help='Output path for SBOM file (default: sbom.json in repo root)'
+)
+@click.option(
+    '--repo',
+    type=click.Path(exists=True),
+    default='.',
+    help='Git repository path (default: current directory)'
+)
+def sbom_generate(project_name, project_version, metadata, output, repo):
+    """
+    Generate SBOM and link to provenance metadata.
+
+    Creates a CycloneDX-format Software Bill of Materials (SBOM) for the
+    project's Python dependencies and enriches DTA provenance metadata with
+    SBOM reference and dependency information.
+
+    Requires CycloneDX to be installed: pip install 'dta-provenance[sbom]'
+
+    Example:
+
+        dta-provenance sbom-generate \\
+            --project-name my-ml-project \\
+            --project-version 1.0.0 \\
+            --metadata provenance.json \\
+            --output sbom.json
+    """
+    console.print("[bold blue]Generating SBOM...[/]")
+
+    try:
+        # Lazy import SBOM integration
+        from .integrations.sbom_integration import SBOMProvenanceBridge
+    except ImportError as e:
+        console.print(f"[red]Error: {e}[/]")
+        console.print("[yellow]Install with: pip install 'dta-provenance[sbom]'[/]")
+        sys.exit(1)
+
+    try:
+        bridge = SBOMProvenanceBridge(Path(repo))
+
+        # Load existing metadata if provided
+        if metadata:
+            prov_metadata = load_provenance_file(Path(metadata))
+            metadata_dict = prov_metadata.to_dict()
+        else:
+            metadata_dict = {}
+
+        # Set output path
+        output_path = Path(output) if output else None
+
+        # Generate SBOM and link to provenance
+        with console.status("[yellow]Generating SBOM from installed packages...[/]"):
+            sbom_path, enriched = bridge.generate_and_link(
+                project_name,
+                project_version,
+                metadata_dict,
+                output_path
+            )
+
+        console.print(f"[green]✅ SBOM generated: {sbom_path}[/]")
+
+        # Extract and display dependency info
+        dep_info = bridge.extract_dependency_info(sbom_path.relative_to(Path(repo)))
+
+        # Display summary
+        table = Table(title="SBOM Summary", box=box.ROUNDED)
+        table.add_column("Metric", style="cyan")
+        table.add_column("Value", style="white")
+
+        table.add_row("Total Dependencies", str(dep_info['total_dependencies']))
+        table.add_row("Licenses Found", str(len(dep_info['licenses'])))
+        table.add_row("SBOM Format", "CycloneDX")
+        table.add_row("SBOM File", str(sbom_path.relative_to(Path(repo))))
+
+        console.print(table)
+
+        # Save enriched metadata if output was specified
+        if metadata:
+            enriched_output = Path(repo) / 'provenance-with-sbom.json'
+            with open(enriched_output, 'w') as f:
+                json.dump(enriched, f, indent=2)
+            console.print(f"[green]Enriched metadata saved to {enriched_output}[/]")
+        else:
+            # Just display the enriched metadata
+            syntax = Syntax(
+                json.dumps(enriched, indent=2),
+                "json",
+                theme="monokai",
+                line_numbers=True
+            )
+            console.print("\n[bold]Enriched Metadata:[/]")
+            console.print(syntax)
+
+        console.print("\n[green]✅ SBOM generation complete[/]")
+        console.print("[cyan]Next steps:[/]")
+        console.print(f"  1. git add {sbom_path.relative_to(Path(repo))}")
+        if metadata:
+            console.print(f"  2. git add provenance-with-sbom.json")
+            console.print("  3. git commit -m 'Add SBOM and provenance'")
+        else:
+            console.print("  2. git commit -m 'Add SBOM'")
+
+    except Exception as e:
+        console.print(f"[red]Error: {e}[/]")
+        sys.exit(1)
+
+
+@cli.command()
+@click.option(
+    '--metadata',
+    '-m',
+    required=True,
+    type=click.Path(exists=True),
+    help='Path to DTA provenance JSON file'
+)
+@click.option(
+    '--run-id',
+    type=str,
+    help='MLflow run ID (uses active run if not provided)'
+)
+@click.option(
+    '--tracking-uri',
+    type=str,
+    help='MLflow tracking URI (optional)'
+)
+@click.option(
+    '--repo',
+    type=click.Path(exists=True),
+    default='.',
+    help='Git repository path (default: current directory)'
+)
+def mlflow_log(metadata, run_id, tracking_uri, repo):
+    """
+    Log provenance metadata to MLflow.
+
+    Stores DTA provenance metadata in an MLflow run as tags and artifacts
+    for easy tracking and querying of data lineage in ML experiments.
+
+    Requires MLflow to be installed: pip install 'dta-provenance[mlflow]'
+
+    Example:
+
+        # Log to active MLflow run
+        dta-provenance mlflow-log --metadata provenance.json
+
+        # Log to specific run
+        dta-provenance mlflow-log \\
+            --metadata provenance.json \\
+            --run-id abc123
+    """
+    console.print("[bold blue]Logging provenance to MLflow...[/]")
+
+    try:
+        # Lazy import MLflow integration
+        from .integrations.mlflow_integration import MLflowProvenanceBridge
+    except ImportError as e:
+        console.print(f"[red]Error: {e}[/]")
+        console.print("[yellow]Install with: pip install 'dta-provenance[mlflow]'[/]")
+        sys.exit(1)
+
+    try:
+        # Load metadata
+        with console.status("[yellow]Loading metadata...[/]"):
+            prov_metadata = load_provenance_file(Path(metadata))
+            metadata_dict = prov_metadata.to_dict()
+
+        console.print("✅ Metadata loaded and validated")
+
+        # Initialize bridge
+        bridge = MLflowProvenanceBridge(Path(repo), tracking_uri=tracking_uri)
+
+        # Log to MLflow
+        with console.status("[yellow]Logging to MLflow...[/]"):
+            logged_run_id = bridge.log_provenance_to_mlflow(
+                metadata_dict,
+                run_id=run_id
+            )
+
+        # Display success
+        panel = Panel(
+            f"[green]MLflow Run: {logged_run_id}[/]\n"
+            f"[cyan]Dataset: {prov_metadata.source['datasetName']}[/]\n"
+            f"[cyan]Provider: {prov_metadata.source.get('providerName', 'N/A')}[/]",
+            title="✅ Provenance Logged to MLflow",
+            border_style="green"
+        )
+        console.print(panel)
+
+        console.print("\n[cyan]View in MLflow UI or query with:[/]")
+        console.print(f"  mlflow runs show {logged_run_id}")
+
+    except Exception as e:
+        console.print(f"[red]Error: {e}[/]")
+        sys.exit(1)
+
+
 if __name__ == '__main__':
     cli()

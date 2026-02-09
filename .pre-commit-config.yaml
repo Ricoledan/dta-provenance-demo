@@ -1,0 +1,33 @@
+---
+# Pre-commit hooks for DTA Provenance Standards Demo
+# See https://pre-commit.com for more information
+
+repos:
+  - repo: local
+    hooks:
+      # Validate DTA provenance JSON files
+      - id: dta-validate-metadata
+        name: Validate DTA Provenance Metadata
+        entry: dta-provenance-validate-metadata
+        language: system
+        files: \.json$
+        pass_filenames: true
+        description: Validates JSON files against DTA v1.0.0 standards
+
+      # Check commit messages for DTA trailers
+      - id: dta-check-trailers
+        name: Check DTA Commit Trailers
+        entry: dta-provenance-check-trailers
+        language: system
+        stages: [commit-msg]
+        pass_filenames: true
+        description: Ensures commits with provenance metadata have required trailers
+
+  # Optional: Standard pre-commit hooks (uncomment to enable)
+  # - repo: https://github.com/pre-commit/pre-commit-hooks
+  #   rev: v4.5.0
+  #   hooks:
+  #     - id: trailing-whitespace
+  #     - id: end-of-file-fixer
+  #     - id: check-yaml
+  #     - id: check-added-large-files

@@ -8,9 +8,11 @@ Production-quality Python library and CLI tool for tracking data provenance usin
 - ✅ **Git Integration** - Uses Git commits for cryptographic integrity
 - ✅ **CLI Tool** - Beautiful terminal interface with Rich
 - ✅ **Python Library** - Importable for integration with ML pipelines
+- ✅ **REST API Server** - FastAPI server for provenance queries
+- ✅ **Web Dashboard** - Interactive UI for visualization and validation
 - ✅ **Verification** - Cryptographic integrity checking
 - ✅ **Audit Trails** - Complete lineage tracking
-- ✅ **Visualization** - Generate provenance graphs
+- ✅ **Visualization** - Generate provenance graphs with D3.js
 - ✅ **Type Hints** - Full type annotations for IDE support
 - ✅ **Tested** - Comprehensive test coverage
 
@@ -47,6 +49,9 @@ dta-provenance trace dataset.csv
 
 # Show provenance metadata
 dta-provenance show HEAD
+
+# Start API server
+dta-provenance serve --port 8000
 ```
 
 ### Python Library Usage
@@ -142,6 +147,8 @@ mypy src/
 
 - [DTA Standards Guide](../docs/DTA_STANDARDS.md) - Complete guide to all 22 fields
 - [Comparison](../docs/COMPARISON.md) - Git vs. Blockchain analysis
+- [Frontend Dashboard](../docs/tutorials/dashboard.md) - Web UI for visualization
+- [API Server](../docs/tutorials/api-server.md) - REST API documentation
 - [Examples](../standards/examples/) - Real-world provenance examples
 
 ## Integration Examples
@@ -150,21 +157,35 @@ mypy src/
 
 ```python
 import mlflow
-from src.provenance import ProvenanceTracker, ProvenanceMetadata
+from pathlib import Path
+from src.provenance import ProvenanceTracker, load_provenance_file
+from src.integrations.mlflow_integration import MLflowProvenanceBridge
+
+# Load provenance metadata
+metadata = load_provenance_file(Path('provenance.json'))
+
+# Initialize tracking
+tracker = ProvenanceTracker(Path("."))
+bridge = MLflowProvenanceBridge(Path("."))
 
 with mlflow.start_run():
     # Train model
     model = train_model(data)
 
-    # Log provenance
-    tracker = ProvenanceTracker(Path("."))
-    commit_hash = tracker.commit_with_provenance(
+    # Create Git commit with MLflow tracking (bidirectional linking)
+    commit_hash, run_id = bridge.commit_with_mlflow_tracking(
         file_paths=[Path("data/training_data.csv")],
-        metadata=metadata,
-        message=f"Training data for run {mlflow.active_run().info.run_id}"
+        metadata=metadata.to_dict(),
+        message=f"Training data for model v1",
+        tracker=tracker,
+        experiment_name="churn-prediction"
     )
 
-    mlflow.log_param("provenance_commit", commit_hash)
+    print(f"Git commit: {commit_hash}")
+    print(f"MLflow run: {run_id}")
+
+# Or use CLI
+# dta-provenance mlflow-log --metadata provenance.json
 ```
 
 ### With DVC (Data Version Control)
@@ -181,6 +202,26 @@ tracker.commit_with_provenance(
     message="Add large dataset (tracked with DVC)"
 )
 ```
+
+### Web Dashboard
+
+Run the complete stack with Docker Compose:
+
+```bash
+# Start API server + Dashboard
+docker-compose up --build
+
+# Access dashboard at http://localhost:3000
+# API available at http://localhost:8000
+```
+
+Features:
+- **Provenance Lookup** - View metadata for any commit
+- **Audit Trail** - Timeline visualization of file history
+- **Lineage Graph** - Interactive D3-based DAG visualization
+- **Validator** - Real-time DTA v1.0.0 compliance checking
+
+See [Dashboard Documentation](../docs/tutorials/dashboard.md) for details.
 
 ### In CI/CD Pipeline
 

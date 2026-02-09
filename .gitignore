@@ -64,6 +64,7 @@ cache/
 artifacts/
 typechain/
 typechain-types/
+deployments/*.json
 
 # Environment variables
 .env
@@ -127,6 +128,11 @@ $RECYCLE.BIN/
 
 # Project-specific
 gas-report.txt
+
+# VS Code Extension
+vscode-extension/out/
+vscode-extension/*.vsix
+vscode-extension/node_modules/
 
 # Claude Code
 .claude/

@@ -1,0 +1,102 @@
+{
+  "name": "dta-provenance-validator",
+  "displayName": "DTA Provenance Validator",
+  "description": "VS Code extension for validating DTA Alliance v1.0.0 provenance metadata with Git integration",
+  "version": "0.1.0",
+  "publisher": "dta-provenance-demo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ricoledan/dta-provenance-demo"
+  },
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Linters",
+    "Snippets",
+    "Data Science"
+  ],
+  "keywords": [
+    "dta",
+    "provenance",
+    "data",
+    "validation",
+    "git",
+    "ml",
+    "ai"
+  ],
+  "activationEvents": [
+    "onLanguage:json",
+    "onCommand:dta.validateFile",
+    "onCommand:dta.showProvenance"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "dta.validateFile",
+        "title": "DTA: Validate Provenance Metadata",
+        "category": "DTA Provenance"
+      },
+      {
+        "command": "dta.showProvenance",
+        "title": "DTA: Show Git Provenance",
+        "category": "DTA Provenance"
+      }
+    ],
+    "jsonValidation": [
+      {
+        "fileMatch": "**/provenance*.json",
+        "url": "./schemas/dta-provenance.json"
+      },
+      {
+        "fileMatch": "**/dta-metadata.json",
+        "url": "./schemas/dta-provenance.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "json",
+        "path": "./snippets/dta-metadata.json"
+      }
+    ],
+    "configuration": {
+      "title": "DTA Provenance Validator",
+      "properties": {
+        "dta.validateOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically validate DTA provenance metadata on file save"
+        },
+        "dta.showStatusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show DTA compliance status in the status bar"
+        },
+        "dta.strictValidation": {
+          "type": "boolean",
+          "default": false,
+          "description": "Treat warnings as errors during validation"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.70.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^5.0.0",
+    "vscode-test": "^1.6.0"
+  },
+  "dependencies": {}
+}

@@ -59,6 +59,34 @@ services:
     networks:
       - dta-network
 
+  # API server for provenance queries
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.git-native
+    image: dta-provenance:api
+    container_name: dta-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./git-native:/app/git-native
+      - git-data:/data
+    working_dir: /app/git-native
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: >
+      sh -c "pip install -e '.[api]' &&
+             dta-provenance serve --host 0.0.0.0 --port 8000 --repo /data"
+    networks:
+      - dta-network
+    depends_on:
+      - git-native
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
 networks:
   dta-network:
     driver: bridge
@@ -74,6 +102,8 @@ volumes:
 # View logs:                docker-compose logs -f
 #
 # Access services:
+# - API Server:             http://localhost:8000
+# - API Docs:               http://localhost:8000/docs
 # - Jupyter:                http://localhost:8888
 # - Blockchain RPC:         http://localhost:8545
 # - Git-native CLI:         docker-compose exec git-native dta-provenance --help
@@ -81,7 +111,9 @@ volumes:
 # Run tests:
 # - Git-native:             docker-compose exec git-native pytest
 # - Blockchain:             docker-compose exec blockchain npx hardhat test
+# - API:                    docker-compose exec api pytest tests/test_api.py
 #
 # Interactive shells:
 # - Git-native:             docker-compose exec git-native /bin/bash
 # - Blockchain:             docker-compose exec blockchain /bin/bash
+# - API:                    docker-compose exec api /bin/bash
